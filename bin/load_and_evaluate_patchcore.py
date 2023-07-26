@@ -155,6 +155,7 @@ def run(methods, results_path, gpu, seed, save_segmentation_images):
             #     segmentations, masks_gt
             # )
             full_pixel_auroc = pixel_scores["auroc"]
+            full_pixel_auroc = 0
 
             # Compute PRO score & PW Auroc only for images with anomalies
             sel_idxs = []
