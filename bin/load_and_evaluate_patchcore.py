@@ -154,7 +154,7 @@ def run(methods, results_path, gpu, seed, save_segmentation_images):
             # pixel_scores = patchcore.metrics.compute_pixelwise_retrieval_metrics(
             #     segmentations, masks_gt
             # )
-            full_pixel_auroc = pixel_scores["auroc"]
+            #full_pixel_auroc = pixel_scores["auroc"]
             full_pixel_auroc = 0
 
             # Compute PRO score & PW Auroc only for images with anomalies
