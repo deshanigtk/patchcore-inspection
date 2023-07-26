@@ -162,10 +162,11 @@ def run(methods, results_path, gpu, seed, save_segmentation_images):
             for i in range(len(masks_gt)):
                 if np.sum(masks_gt[i]) > 0:
                     sel_idxs.append(i)
-            pixel_scores = patchcore.metrics.compute_pixelwise_retrieval_metrics(
-                [segmentations[i] for i in sel_idxs], [masks_gt[i] for i in sel_idxs]
-            )
-            anomaly_pixel_auroc = pixel_scores["auroc"]
+            # pixel_scores = patchcore.metrics.compute_pixelwise_retrieval_metrics( #TODO: uncomment
+            #     [segmentations[i] for i in sel_idxs], [masks_gt[i] for i in sel_idxs]
+            # )
+            #anomaly_pixel_auroc = pixel_scores["auroc"]
+            anomaly_pixel_auroc = 0
 
             result_collect.append(
                 {
