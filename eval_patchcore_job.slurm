@@ -30,11 +30,11 @@ module load cudnn/8.9.2.26-cuda-12.0.1
 
 
 datapath=/data/gpfs/projects/punim0512/deshani_projects/datasets/mvtec
-loadpath=/data/gpfs/projects/punim0512/deshani_projects/patchcore-inspection/results/MVTecAD_Results/
+loadpath=/data/gpfs/projects/punim0512/deshani_projects/patchcore-inspection/results/MVTecAD_Results
 modelfolder=IM224_WR50_L2-3_P01_D1024-1024_PS-3_AN-1_S0_0
 savefolder=evaluated_results'/'$modelfolder
 
-datasets=('cable'  'capsule'  'carpet'  'grid'  'hazelnut' 'leather'  'metal_nut'  'pill' 'screw' 'tile' 'toothbrush' 'transistor' 'wood' 'zipper')
+datasets=('bottle' 'cable'  'capsule'  'carpet'  'grid'  'hazelnut' 'leather'  'metal_nut'  'pill' 'screw' 'tile' 'toothbrush' 'transistor' 'wood' 'zipper')
 dataset_flags=($(for dataset in "${datasets[@]}"; do echo '-d '$dataset; done))
 model_flags=($(for dataset in "${datasets[@]}"; do echo '-p '$loadpath'/'$modelfolder'/models/mvtec_'$dataset; done))
 
