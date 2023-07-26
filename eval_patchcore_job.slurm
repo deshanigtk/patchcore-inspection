@@ -40,4 +40,4 @@ model_flags=($(for dataset in "${datasets[@]}"; do echo '-p '$loadpath'/'$modelf
 
 env PYTHONPATH=/data/gpfs/projects/punim0512/deshani_projects/patchcore-inspection/src python bin/load_and_evaluate_patchcore.py --gpu 0 --seed 0 $savefolder \
 patch_core_loader "${model_flags[@]}" \
-dataset --resize 256 --imagesize 244 "${dataset_flags[@]}" mvtec $datapath
+dataset --resize 366 --imagesize 320 "${dataset_flags[@]}" mvtec $datapath
