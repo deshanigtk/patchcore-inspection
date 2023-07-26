@@ -28,6 +28,7 @@ conda activate ../envs/patchcore-env
 module load fosscuda/2020b
 module load cudnn/8.0.4.30-cuda-11.1.1
 
+env PYTHONPATH=src python bin/run_patchcore.py
 
 python bin/run_patchcore.py --gpu 0 --seed 0 --save_patchcore_model \
     --log_group IM224_WR50_L2-3_P01_D1024-1024_PS-3_AN-1_S0 \
