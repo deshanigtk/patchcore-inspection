@@ -102,7 +102,6 @@ class MVTecDataset(torch.utils.data.Dataset):
 
         return {
             "image": image,
-            "mask": None,
             "classname": classname,
             "anomaly": anomaly,
             "is_anomaly": int(anomaly != "good"),
