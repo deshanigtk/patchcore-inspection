@@ -89,19 +89,20 @@ class MVTecDataset(torch.utils.data.Dataset):
         self.imagesize = (3, imagesize, imagesize)
 
     def __getitem__(self, idx):
-        classname, anomaly, image_path, mask_path = self.data_to_iterate[idx]
+        #classname, anomaly, image_path, mask_path = self.data_to_iterate[idx]
+        classname, anomaly, image_path = self.data_to_iterate[idx]
         image = PIL.Image.open(image_path).convert("RGB")
         image = self.transform_img(image)
 
-        if self.split == DatasetSplit.TEST and mask_path is not None:
-            mask = PIL.Image.open(mask_path)
-            mask = self.transform_mask(mask)
-        else:
-            mask = torch.zeros([1, *image.size()[1:]])
+        # if self.split == DatasetSplit.TEST and mask_path is not None:
+        #     mask = PIL.Image.open(mask_path)
+        #     mask = self.transform_mask(mask)
+        # else:
+        #     mask = torch.zeros([1, *image.size()[1:]])
 
         return {
             "image": image,
-            "mask": mask,
+            "mask": None,
             "classname": classname,
             "anomaly": anomaly,
             "is_anomaly": int(anomaly != "good"),
