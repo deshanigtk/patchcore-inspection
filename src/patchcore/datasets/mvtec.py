@@ -143,14 +143,14 @@ class MVTecDataset(torch.utils.data.Dataset):
                             classname
                         ][anomaly][train_val_split_idx:]
 
-                if self.split == DatasetSplit.TEST and anomaly != "good":
-                    anomaly_mask_path = os.path.join(maskpath, anomaly)
-                    anomaly_mask_files = sorted(os.listdir(anomaly_mask_path))
-                    maskpaths_per_class[classname][anomaly] = [
-                        os.path.join(anomaly_mask_path, x) for x in anomaly_mask_files
-                    ]
-                else:
-                    maskpaths_per_class[classname]["good"] = None
+                # if self.split == DatasetSplit.TEST and anomaly != "good": TODO: Uncomment for non-MND
+                    # anomaly_mask_path = os.path.join(maskpath, anomaly)
+                    # anomaly_mask_files = sorted(os.listdir(anomaly_mask_path))
+                    # maskpaths_per_class[classname][anomaly] = [
+                    #     os.path.join(anomaly_mask_path, x) for x in anomaly_mask_files
+                    # ]
+                # else:
+                #     maskpaths_per_class[classname]["good"] = None
 
         # Unrolls the data dictionary to an easy-to-iterate list.
         data_to_iterate = []
