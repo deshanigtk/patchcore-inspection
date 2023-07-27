@@ -80,11 +80,11 @@ def run(methods, results_path, gpu, seed, save_segmentation_images):
                         i + 1, len(PatchCore_list)
                     )
                 )
-                scores, segmentations, labels_gt, masks_gt = PatchCore.predict(
+                scores, labels_gt = PatchCore.predict(
                     dataloaders["testing"]
                 )
                 aggregator["scores"].append(scores)
-                aggregator["segmentations"].append(segmentations)
+                # aggregator["segmentations"].append(segmentations)
 
             scores = np.array(aggregator["scores"])
             min_scores = scores.min(axis=-1).reshape(-1, 1)
@@ -92,19 +92,19 @@ def run(methods, results_path, gpu, seed, save_segmentation_images):
             scores = (scores - min_scores) / (max_scores - min_scores)
             scores = np.mean(scores, axis=0)
 
-            segmentations = np.array(aggregator["segmentations"])
-            min_scores = (
-                segmentations.reshape(len(segmentations), -1)
-                .min(axis=-1)
-                .reshape(-1, 1, 1, 1)
-            )
-            max_scores = (
-                segmentations.reshape(len(segmentations), -1)
-                .max(axis=-1)
-                .reshape(-1, 1, 1, 1)
-            )
-            segmentations = (segmentations - min_scores) / (max_scores - min_scores)
-            segmentations = np.mean(segmentations, axis=0)
+            # segmentations = np.array(aggregator["segmentations"])
+            # min_scores = (
+            #     segmentations.reshape(len(segmentations), -1)
+            #     .min(axis=-1)
+            #     .reshape(-1, 1, 1, 1)
+            # )
+            # max_scores = (
+            #     segmentations.reshape(len(segmentations), -1)
+            #     .max(axis=-1)
+            #     .reshape(-1, 1, 1, 1)
+            # )
+            # segmentations = (segmentations - min_scores) / (max_scores - min_scores)
+            # segmentations = np.mean(segmentations, axis=0)
 
             anomaly_labels = [
                 x[1] != "good" for x in dataloaders["testing"].dataset.data_to_iterate
@@ -115,9 +115,9 @@ def run(methods, results_path, gpu, seed, save_segmentation_images):
                 image_paths = [
                     x[2] for x in dataloaders["testing"].dataset.data_to_iterate
                 ]
-                mask_paths = [
-                    x[3] for x in dataloaders["testing"].dataset.data_to_iterate
-                ]
+                # mask_paths = [
+                #     x[3] for x in dataloaders["testing"].dataset.data_to_iterate
+                # ]
 
                 def image_transform(image):
                     in_std = np.array(
@@ -134,15 +134,15 @@ def run(methods, results_path, gpu, seed, save_segmentation_images):
                 def mask_transform(mask):
                     return dataloaders["testing"].dataset.transform_mask(mask).numpy()
 
-                patchcore.utils.plot_segmentation_images(
-                    results_path,
-                    image_paths,
-                    segmentations,
-                    scores,
-                    mask_paths,
-                    image_transform=image_transform,
-                    mask_transform=mask_transform,
-                )
+                # patchcore.utils.plot_segmentation_images(
+                #     results_path,
+                #     image_paths,
+                #     segmentations,
+                #     scores,
+                #     mask_paths,
+                #     image_transform=image_transform,
+                #     mask_transform=mask_transform,
+                # )
 
             LOGGER.info("Computing evaluation metrics.")
             # Compute Image-level AUROC scores for all images.
@@ -158,10 +158,10 @@ def run(methods, results_path, gpu, seed, save_segmentation_images):
             full_pixel_auroc = 0
 
             # Compute PRO score & PW Auroc only for images with anomalies
-            sel_idxs = []
-            for i in range(len(masks_gt)):
-                if np.sum(masks_gt[i]) > 0:
-                    sel_idxs.append(i)
+            # sel_idxs = []
+            # for i in range(len(masks_gt)):
+            #     if np.sum(masks_gt[i]) > 0:
+            #         sel_idxs.append(i)
             # pixel_scores = patchcore.metrics.compute_pixelwise_retrieval_metrics( #TODO: uncomment
             #     [segmentations[i] for i in sel_idxs], [masks_gt[i] for i in sel_idxs]
             # )

@@ -185,20 +185,16 @@ class PatchCore(torch.nn.Module):
         _ = self.forward_modules.eval()
 
         scores = []
-        masks = []
         labels_gt = []
-        masks_gt = []
         with tqdm.tqdm(dataloader, desc="Inferring...", leave=False) as data_iterator:
             for image in data_iterator:
                 if isinstance(image, dict):
                     labels_gt.extend(image["is_anomaly"].numpy().tolist())
-                    masks_gt.extend(image["mask"].numpy().tolist())
                     image = image["image"]
-                _scores, _masks = self._predict(image)
-                for score, mask in zip(_scores, _masks):
+                _scores = self._predict(image)
+                for score in _scores:
                     scores.append(score)
-                    masks.append(mask)
-        return scores, masks, labels_gt, masks_gt
+        return scores, labels_gt
 
     def _predict(self, images):
         """Infer score and mask for a batch of images."""
@@ -223,9 +219,9 @@ class PatchCore(torch.nn.Module):
             scales = patch_shapes[0]
             patch_scores = patch_scores.reshape(batchsize, scales[0], scales[1])
 
-            masks = self.anomaly_segmentor.convert_to_segmentation(patch_scores)
+            #masks = self.anomaly_segmentor.convert_to_segmentation(patch_scores)
 
-        return [score for score in image_scores], [mask for mask in masks]
+        return [score for score in image_scores]
 
     @staticmethod
     def _params_file(filepath, prepend=""):
