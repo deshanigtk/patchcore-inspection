@@ -24,7 +24,7 @@
 # The modules to load:
 module load anaconda3/2021.11
 eval "$(conda shell.bash hook)"
-conda activate ../envs/patchcore-env
+conda activate ../envs/patchcore-env-v2
 module load fosscuda/2020b
 module load cudnn/8.9.2.26-cuda-12.0.1
 
