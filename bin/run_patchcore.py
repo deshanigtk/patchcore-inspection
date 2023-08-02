@@ -51,6 +51,8 @@ def run(
     list_of_dataloaders = methods["get_dataloaders"](seed)
 
     device = patchcore.utils.set_torch_device(gpu)
+    print(f"Using device: {device}")
+    print("**************************************************")
     # Device context here is specifically set and used later
     # because there was GPU memory-bleeding which I could only fix with
     # context managers.

@@ -12,8 +12,8 @@
 # Maximum number of tasks/CPU cores used by the job:
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --mem=10G
-#SBATCH --cpus-per-task=2
+#SBATCH --mem=32G
+#SBATCH --cpus-per-task=1
 
 # The maximum running time of the job in days-hours:mins:sec
 #SBATCH --time=05-00:00:00
@@ -24,7 +24,7 @@
 # The modules to load:
 module load anaconda3/2021.11
 eval "$(conda shell.bash hook)"
-conda activate ../envs/patchcore-env-v2
+conda activate ../envs/patchcore-env-v3
 module load fosscuda/2020b
 module load cudnn/8.9.2.26-cuda-12.0.1
 
