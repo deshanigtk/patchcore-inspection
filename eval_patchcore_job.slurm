@@ -24,14 +24,14 @@
 # The modules to load:
 module load anaconda3/2021.11
 eval "$(conda shell.bash hook)"
-conda activate ../envs/patchcore-env
+conda activate ../envs/patchcore-env-v2
 module load fosscuda/2020b
 module load cudnn/8.9.2.26-cuda-12.0.1
 
 
 datapath=/data/gpfs/projects/punim0512/deshani_projects/datasets/mvtec
 loadpath=/data/gpfs/projects/punim0512/deshani_projects/patchcore-inspection/results/MVTecAD_Results
-modelfolder=IM224_WR50_L2-3_P01_D1024-1024_PS-3_AN-1_S0_0
+modelfolder=IM224_WR50_L2-3_P01_D1024-1024_PS-3_AN-1_S0
 savefolder=evaluated_results'/'$modelfolder
 
 datasets=('bottle' 'cable'  'capsule'  'carpet'  'grid'  'hazelnut' 'leather'  'metal_nut'  'pill' 'screw' 'tile' 'toothbrush' 'transistor' 'wood' 'zipper')
