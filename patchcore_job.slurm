@@ -29,7 +29,7 @@ module load fosscuda/2020b
 module load cudnn/8.9.2.26-cuda-12.0.1
 
 datapath=/data/gpfs/projects/punim0512/deshani_projects/datasets/mvtec
-datasets=('screw' 'tile')
+datasets=('bottle' 'cable' 'capsule' 'carpet' 'grid' 'hazelnut' 'leather' 'metal_nut' 'pill' 'screw' 'tile' 'toothbrush' 'transistor' 'wood' 'zipper')
 dataset_flags=($(for dataset in "${datasets[@]}"; do echo '-d '$dataset; done))
 
 env PYTHONPATH=/data/gpfs/projects/punim0512/deshani_projects/patchcore-inspection/src python bin/run_patchcore.py --gpu 0 --seed 0 --save_patchcore_model \
