@@ -34,4 +34,4 @@ env PYTHONPATH=/data/gpfs/projects/punim0512/deshani_projects/patchcore-inspecti
     --log_project MVTecAD_Results results patch_core -b wideresnet50 -le layer2 -le layer3 \
     --pretrain_embed_dimension 1024  --target_embed_dimension 1024 --anomaly_scorer_num_nn 1 \
     --patchsize 3 sampler -p 0.1 approx_greedy_coreset dataset --resize 256 --imagesize 224 \
-    --subdatasets mnd-ch01-patches-all-1024 mvtec /data/gpfs/projects/punim0512/deshani_projects/datasets/
+    --subdatasets mnd-1024-sample mvtec /data/gpfs/projects/punim0512/deshani_projects/datasets/
