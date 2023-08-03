@@ -3,11 +3,34 @@ import numpy as np
 from sklearn import metrics
 
 
+# def compute_imagewise_retrieval_metrics(
+#     anomaly_prediction_weights, anomaly_ground_truth_labels
+# ):
+#     """
+#     Computes retrieval statistics (AUROC, FPR, TPR).
+#
+#     Args:
+#         anomaly_prediction_weights: [np.array or list] [N] Assignment weights
+#                                     per image. Higher indicates higher
+#                                     probability of being an anomaly.
+#         anomaly_ground_truth_labels: [np.array or list] [N] Binary labels - 1
+#                                     if image is an anomaly, 0 if not.
+#     """
+#     fpr, tpr, thresholds = metrics.roc_curve(
+#         anomaly_ground_truth_labels, anomaly_prediction_weights
+#     )
+#
+#     auroc = metrics.roc_auc_score(
+#         anomaly_ground_truth_labels, anomaly_prediction_weights
+#     )
+#     return {"auroc": auroc, "fpr": fpr, "tpr": tpr, "threshold": thresholds}
+
+
 def compute_imagewise_retrieval_metrics(
-    anomaly_prediction_weights, anomaly_ground_truth_labels
+        control_prediction_weights, control_ground_truth_labels
 ):
     """
-    Computes retrieval statistics (AUROC, FPR, TPR).
+    Computes retrieval statistics (Recall).
 
     Args:
         anomaly_prediction_weights: [np.array or list] [N] Assignment weights
@@ -16,13 +39,9 @@ def compute_imagewise_retrieval_metrics(
         anomaly_ground_truth_labels: [np.array or list] [N] Binary labels - 1
                                     if image is an anomaly, 0 if not.
     """
-    fpr, tpr, thresholds = metrics.roc_curve(
-        anomaly_ground_truth_labels, anomaly_prediction_weights
-    )
-    auroc = metrics.roc_auc_score(
-        anomaly_ground_truth_labels, anomaly_prediction_weights
-    )
-    return {"auroc": auroc, "fpr": fpr, "tpr": tpr, "threshold": thresholds}
+    print(control_prediction_weights)
+    print("************")
+    print(control_ground_truth_labels)
 
 
 def compute_pixelwise_retrieval_metrics(anomaly_segmentations, ground_truth_masks):
